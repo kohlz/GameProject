@@ -172,6 +172,10 @@ initial_startup = True
 # 失败条件
 spawn_garbage_count = 0
 
+# 添加声音文件
+grass_plant_audio = pygame.mixer.Sound(os.path.join('audio', 'grass.mp3'))
+garbage_clean_audio = pygame.mixer.Sound(os.path.join('audio', 'garbage.mp3'))
+
 while running:
     window.fill(WHITE)
 
@@ -324,11 +328,13 @@ while running:
                         if player_rect.colliderect(garbage.rect):
                             garbage.clear()
                             trash_clean += 1
+                            garbage_clean_audio.play()
                 # 当按下键盘上的F键时，检查玩家是否能够种植草块，并在合适的情况下进行种植
                 if event.key == pygame.K_f:
                     if can_plant_grass(player_rect):
                         plant_grass(player_rect)
                         grass_plant += 1
+                        grass_plant_audio.play()
             
                         
         # 获取键盘按键状态
